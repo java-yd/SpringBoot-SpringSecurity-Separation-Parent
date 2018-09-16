@@ -42,10 +42,13 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
         if (userInfo == null) {
               throw new BadCredentialsException(StatusCodeEnum.USERNAME_OR_PASSWORD_ERROR.getMessage());
         }
-        // //这里我们还要判断密码是否正确，实际应用中，我们的密码一般都会加密，以Md5加密为例
+
+
+        // //这里我们还要判断密码是否正确，实际应用中，我们的密码一般都会加密，以Md5加密为例，设置密码时，也要使用该对象
+        //springboot 2.0.2使用 PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 //         Md5PasswordEncoder md5PasswordEncoder=new Md5PasswordEncoder();
         // //这里第个参数，是salt
-        // 就是加点盐的意思，这样的好处就是用户的密码如果都是123456，由于盐的不同，密码也是不一样的,由于数据库保存的密码未加盐，所以不加盐，只md5加密，由于本版本太高，未找到该对象，还是最普通的md5加密，因为数据库就是最普通md5加密
+        // 就是加点盐的意思，这样的好处就是用户的密码如果都是123456，由于盐的不同，密码也是不一样的,由于数据库保存的密码未加盐，所以不加盐
 //         String encodePwd = md5PasswordEncoder.encodePassword(password, null);
         // //这里判断密码正确与否
         String encodePwd = DigestUtils.md5DigestAsHex(password.getBytes());
